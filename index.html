@@ -22,13 +22,31 @@
 			}
 		});
 	</script>
+	<script>
+	AFRAME.registerComponent('rotation-reader', {
+  /**
+   * We use IIFE (immediately-invoked function expression) to only allocate one
+   * vector or euler and not re-create on every tick to save memory.
+   */
+  tick: (function () {
+    var position = new THREE.Vector3();
+    var rotation = new THREE.Euler();
+
+    return function () {
+      this.el.object3D.getWorldPosition(position);
+      this.el.object3D.getWorldRotation(rotation);
+      // position and rotation now contain vector and euler in world space.
+    };
+  })
+});
+</script>
 	
     <a-scene
         vr-mode-ui="enabled: false"
 		embedded
         arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
         
-        <a-camera gps-camera></a-camera>
+        <a-camera gps-camera rotation-reader  ></a-camera>
 		<!-- add 3D model -->
 		<!-- home location 50.09870375941795, 14.445555805758241 -->
 		
