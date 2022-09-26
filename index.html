@@ -23,22 +23,22 @@
 		});
 	</script>
 	<script>
-	AFRAME.registerComponent('rotation-reader', {
-  /**
-   * We use IIFE (immediately-invoked function expression) to only allocate one
-   * vector or euler and not re-create on every tick to save memory.
-   */
-  tick: (function () {
-    var position = new THREE.Vector3();
-    var rotation = new THREE.Euler();
+		AFRAME.registerComponent('rotation-reader', {
+		  /**
+		   * We use IIFE (immediately-invoked function expression) to only allocate one
+		   * vector or euler and not re-create on every tick to save memory.
+		   */
+			tick: (function () {
+				var position = new THREE.Vector3();
+				var rotation = new THREE.Euler();
 
-    return function () {
-      this.el.object3D.getWorldPosition(position);
-      this.el.object3D.getWorldRotation(rotation);
-      // position and rotation now contain vector and euler in world space.
-    };
-  })
-});
+				return function () {
+					this.el.object3D.getWorldPosition(position);
+					this.el.object3D.getWorldRotation(rotation);
+				  // position and rotation now contain vector and euler in world space.
+				};
+		  })
+		});
 </script>
 	
     <a-scene
@@ -46,17 +46,18 @@
 		embedded
         arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
         
-        <a-camera gps-camera rotation-reader  ></a-camera>
+        <a-camera gps-camera rotation-reader locationfinder ></a-camera>
 		<!-- add 3D model -->
 		<!-- home location 50.09870375941795, 14.445555805758241 -->
-		<!--home location2 50.10528272919711, 14.452779104818152-->
+		<!-- home location2 50.10528272919711, 14.452779104818152-->
 		
 		<!-- 50.86773683981976, 4.344428916831181 real place -->
+		<!-- look-at="[gps-camera]" -->
 		<a-entity 
 			gltf-model="./assets/text/SculptureText.gltf" 
 			rotation="0 0 0" 
-			scale="1 1 1" 
-			<!--look-at="[gps-camera]" -->
+			scale="1 1 1"
+			look-at="0 0 0"
 			gps-entity-place="latitude: 50.10528272919711; longitude: 14.452779104818152;" />
 	</a-scene>
 </body>
