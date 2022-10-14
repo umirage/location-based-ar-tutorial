@@ -4,8 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>GeoAR.js demo</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v$npm_package_version/dist/aframe-physics-system.min.js"></script>
 
@@ -22,7 +21,7 @@
 			}
 		});
 	</script>
-	<!--<script>
+	<script>
 		AFRAME.registerComponent('rotation-reader', {
 		  /**
 		   * We use IIFE (immediately-invoked function expression) to only allocate one
@@ -39,12 +38,27 @@
 				};
 		  })
 		});
-	</script>-->
+	</script>
 	
     <a-scene
         vr-mode-ui="enabled: false"
 		embedded
         arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+		
+		<a-assets>
+			<a-cubemap id="cube-env-map">
+			  <img src="./assets/hdr/px.png">
+			  <img src="./assets/hdr/nx.png">
+			  <img src="./assets/hdr/py.png">
+			  <img src="./assets/hdr/ny.png">
+			  <img src="./assets/hdr/pz.png">
+			  <img src="./assets/hdr/nz.png">
+			</a-cubemap>
+			<img id="sky" src="./assets/hdr/enviromentRGBD.png">
+			<img id="aoCZ" src="./assets/textures/AO_CZ_sm.png">
+			<img id="aoFR" src="./assets/textures/AO_FR_sm.png">
+			<img id="aoND" src="./assets/textures/AO_ND_sm.png">		
+	    </a-assets>
         
         <a-camera gps-camera rotation-reader ></a-camera>
 		<!-- add 3D model -->
@@ -53,43 +67,15 @@
 		
 		<!-- 50.86773683981976, 4.344428916831181 real place -->
 		<!-- look-at="[gps-camera]" -->
-		<!-- gltf-model="./assets/text/SculptureText.gltf"  -->
+		<!-- gltf-model="./assets/text/Text-circle-anim.gltf"  -->
 		<a-entity
-			gltf-model="./assets/cube/cube.gltf" 
+			gltf-model="./assets/text/Text-circle-anim.gltf" 
+			animation-mixer="timeScale: 0.5"
 			rotation="0 0 0" 
 			scale="1 1 1"
-			gps-entity-place="latitude: 50.1051134; longitude: 14.4528164" 
+			gps-entity-place="latitude: 50.107992; longitude: 14.447977" 
 			>
 		</a-entity>
 	</a-scene>
 </body>
 </html>
-
-<!--
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>GeoAR.js demo</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-  </head>
-
-  <body style="margin: 0; overflow: hidden;">
-    <a-scene
-      vr-mode-ui="enabled: false"
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;"
-    >
-      <a-text
-        value="This content will always face you."
-        look-at="[gps-camera]"
-        scale="120 120 120"
-        gps-entity-place="latitude: <add-your-latitude>; longitude: <add-your-longitude>;"
-      ></a-text>
-      <a-camera gps-camera rotation-reader> </a-camera>
-    </a-scene>
-  </body>
-</html>
--->
