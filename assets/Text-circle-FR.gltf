@@ -1,0 +1,190 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.3.27",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "FRmeshMerge"
+        }
+    ],
+    "animations" : [
+        {
+            "channels" : [
+                {
+                    "sampler" : 0,
+                    "target" : {
+                        "node" : 0,
+                        "path" : "rotation"
+                    }
+                }
+            ],
+            "name" : "FRmeshMergeAction",
+            "samplers" : [
+                {
+                    "input" : 4,
+                    "interpolation" : "LINEAR",
+                    "output" : 5
+                }
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "name" : "FR",
+            "occlusionTexture" : {
+                "index" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.8600000143051147,
+                    0.8600000143051147,
+                    0.8600000143051147,
+                    1
+                ],
+                "roughnessFactor" : 0.3499999940395355
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Text.011",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "AO_FR_sm",
+            "uri" : "textures/AO_FR_sm.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 6374,
+            "max" : [
+                3.9988832473754883,
+                4.488941192626953,
+                3.9998722076416016
+            ],
+            "min" : [
+                -3.5165936946868896,
+                3.9206831455230713,
+                -3.9970734119415283
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 6374,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 6374,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 15318,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 1441,
+            "max" : [
+                60
+            ],
+            "min" : [
+                0
+            ],
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 1441,
+            "type" : "VEC4"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 76488,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 76488,
+            "byteOffset" : 76488,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 50992,
+            "byteOffset" : 152976,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 30636,
+            "byteOffset" : 203968,
+            "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 5764,
+            "byteOffset" : 234604
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 23056,
+            "byteOffset" : 240368
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 263424,
+            "uri" : "Text-circle-FR.bin"
+        }
+    ]
+}
