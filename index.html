@@ -13,6 +13,8 @@
         THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 	<script src="./assets/js/cube-env-map.js"></script>
+	<script src="./assets/js/camera-cube-env.js"></script>
+	<script src="./assets/js/refract-cube-env.js"></script>
 	
 </head>
 
@@ -66,7 +68,7 @@
 			<img id="aoND" src="./assets/textures/AO_ND_sm.png">		
 	    </a-assets>
         
-        <a-camera gps-camera rotation-reader ></a-camera>
+        <a-camera gps-camera="simulateLatitude:50.10554663042668; simulateLongitude:14.452106764832306" rotation-reader ></a-camera>
 		<!-- add 3D model -->
 		<!--gps-camera="simulateLatitude:50.107992; simulateLongitude:14.447977"-->
 		<!-- home location 50.09870375941795, 14.445555805758241 -->
@@ -81,6 +83,7 @@
 			rotation="0 0 0"
 			scale="1 1 1"
 			gps-entity-place="latitude: 50.10554663042668; longitude: 14.452106764832306" 
+			camera-cube-env="distance: 5000; resolution: 512; repeat: true; interval: 600"
 			>
 		</a-entity>
 		<a-entity
