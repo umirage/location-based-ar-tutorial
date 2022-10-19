@@ -3,22 +3,21 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>GeoAR.js demo</title>
+    <title>Parallels</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v$npm_package_version/dist/aframe-physics-system.min.js"></script>
+	<script src="https://raw.githack.com/n5ro/aframe-physics-system/master/dist/aframe-physics-system.min.js"></script>
 	<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script>
-        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
-    </script>
-	<script src="./assets/js/cube-env-map.js"></script>
-	<script src="./assets/js/camera-cube-env.js"></script>
-	<script src="./assets/js/refract-cube-env.js"></script>
+	<script src="https://raw.githack.com/haf-decent/aframe-shadow-casting/master/index.js"></script>
+	<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+	<script src="https://unpkg.com/aframe-cubemap-component@2.1.0/dist/aframe-cubemap-component.min.js"></script>
 	
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
+<script>
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
 	<script>
 		AFRAME.registerComponent('locationfinder',{
 			init : function() {
@@ -46,62 +45,144 @@
 		  })
 		});
 	</script>
+	<!-- generate RGBA image: https://playground.babylonjs.com/#95Y4D7-->
+	<script>
+      AFRAME.registerComponent("foo", {
+        init: function() {
+          var targetCube = new THREE.WebGLRenderTargetCube(512, 512);
+          var renderer = this.el.sceneEl.renderer;
+
+          this.el.addEventListener("model-loaded", e => {
+            let mesh = this.el.getObject3D("mesh");
+            
+            var texture = new THREE.TextureLoader().load(
+              "./assets/hdr/enviromentRGBD_256.png",
+              function() {
+                var cubeTex = targetCube.fromEquirectangularTexture(renderer, texture);
+                mesh.traverse(function(el) {
+                  if (el.material) {
+                    el.material.envMap = cubeTex.texture;
+                    el.material.envMap.intensity = 3;
+                    el.material.needsUpdate = true;
+                  }
+                });
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                renderer.outputEncoding = THREE.sRGBEncoding;
+              }
+            );
+          });
+        }
+      });
+    </script>
+
 	
     <a-scene
         vr-mode-ui="enabled: false"
 		embedded
         arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;"
-		renderer="antialias: true; colorManagement: true; toneMapping: ACESFilmic;" >
+		renderer="antialias: true; colorManagement: true; toneMapping: ACESFilmic;" 
+		class="fullscreen" inspector="" keyboard-shortcuts="" screenshot="" shadow="autoUpdate: true; type:pcfsoft"
+		light="defaultLightsEnabled: false"
+		>
 		
 		<a-assets>
-			<a-cubemap id="cube-env-map">
-			  <img src="./assets/hdr/px.png">
-			  <img src="./assets/hdr/nx.png">
-			  <img src="./assets/hdr/py.png">
-			  <img src="./assets/hdr/ny.png">
-			  <img src="./assets/hdr/pz.png">
-			  <img src="./assets/hdr/nz.png">
-			</a-cubemap>
-			<img id="sky" src="./assets/hdr/enviromentRGBD.png">
-			<img id="aoCZ" src="./assets/textures/AO_CZ_sm.png">
-			<img id="aoFR" src="./assets/textures/AO_FR_sm.png">
-			<img id="aoND" src="./assets/textures/AO_ND_sm.png">		
+			<a-asset-item id="TextND" src="./assets/Text-CZ.glb"></a-asset-item>
+			<a-asset-item id="TextND" src="./assets/Text-FR.glb"></a-asset-item>
+			<a-asset-item id="TextND" src="./assets/Text-ND.glb"></a-asset-item>
+			<img id="sky" src="./assets/hdr/enviromentRGBD_256.png">	
 	    </a-assets>
-        
-        <a-camera gps-camera="simulateLatitude:50.10554663042668; simulateLongitude:14.452106764832306" rotation-reader ></a-camera>
-		<!-- add 3D model -->
-		<!--gps-camera="simulateLatitude:50.107992; simulateLongitude:14.447977"-->
-		<!-- home location 50.09870375941795, 14.445555805758241 -->
-		<!-- home location2 50.10528272919711, 14.452779104818152-->
+
+		<!--<a-sky color="#AAA"></a-sky>-->
 		
-		<!-- 50.86773683981976, 4.344428916831181 real place -->
-		<!-- look-at="[gps-camera]" -->
-		<!-- gltf-model="./assets/text/Text-circle-anim.gltf"  -->
+		
+		<a-light type="ambient" intensity="0.5" castShadow="false"></a-light>
+            <a-shadow-light 
+                type="spot"
+				intensity="10"
+				color="#ffffff"
+				near="1"
+                far="5000"
+                target="0 0 0"
+				tlbr="0.5 -0.5 0.5 -0.5"
+                mapsize="4096 4096"
+                position="0 70 0"
+				helper="false"
+				bias="-0.000222">
+            </a-shadow-light>
+            <a-shadow-plane
+                dimensions="100 100" 
+                position="0 0 0"
+				opacity="0.6">
+            </a-shadow-plane>
+		
+		
+        <a-camera gps-camera="simulateLatitude:50.10554663042668; simulateLongitude:14.452106764832306" 
+		rotation-reader >
+		</a-camera>
+
 		<a-entity
-			gltf-model="./assets/Text-circle-CZ.gltf" 
-			animation-mixer="timeScale: 0.5"
+			gltf-model="#TextCZ" 
+			rotation="0 120 0"
+			animation="property: rotation; to: 0 -240 0; loop: true; dur: 10000; easing:linear"
 			rotation="0 0 0"
 			scale="1 1 1"
 			gps-entity-place="latitude: 50.10554663042668; longitude: 14.452106764832306" 
-			camera-cube-env="distance: 5000; resolution: 512; repeat: true; interval: 600"
-			>
+			shadow="cast: true"
+			cube-env-map="path: ./assets/hdr/cubemap/;
+                 extension: jpg;
+                 reflectivity: 0.9;"
+			shadow="receive: false"
+			foo>
 		</a-entity>
+		
 		<a-entity
-			gltf-model="./assets/Text-circle-FR.gltf" 
-			animation-mixer="timeScale: 0.5"
+			gltf-model="#TextFR" 
+			rotation="0 240 0"
+			animation="property: rotation; to: 0 -120 0; loop: true; dur: 10000; easing:linear"
 			rotation="0 0 0"
 			scale="1 1 1"
-			gps-entity-place="latitude: 50.10551240083953; longitude: 14.450827988445251" 
-			>
+			gps-entity-place="latitude: 50.10554663042668; longitude: 14.452106764832306" 
+			shadow="cast: true"
+			cube-env-map="path: ./assets/hdr/cubemap/;
+                 extension: jpg;
+                 reflectivity: 0.9;"
+			shadow="receive: false"
+			foo>
 		</a-entity>
+		
 		<a-entity
-			gltf-model="./assets/Text-circle-ND.gltf" 
-			animation-mixer="timeScale: 0.5"
-			rotation="0 0 0" 
+			gltf-model="#TextND" 
+			rotation="0 0 0"
+			animation="property: rotation; to: 0 -360 0; loop: true; dur: 10000; easing:linear"
+			rotation="0 0 0"
 			scale="1 1 1"
-			gps-entity-place="latitude: 50.10552057517258; longitude: 14.45014306582761" 
-			>
+			gps-entity-place="latitude: 50.10554663042668; longitude: 14.452106764832306" 
+			shadow="cast: true"
+			cube-env-map="path: ./assets/hdr/cubemap/;
+                 extension: jpg;
+                 reflectivity: 0.9;"
+			shadow="receive: false"
+			foo>
 		</a-entity>
+		
+		<a-entity geometry="primitive: sphere; radius: 1" 
+		position="2.5 0 -6"
+		material="envMap: #cubemap; roughness: 0; metalness: 1.0"
+		cube-env-map="path: ./assets/hdr/cubemap/;
+                 extension: jpg;
+                 reflectivity: 0.9;"
+		foo
+		></a-entity>
+		
+		<script>
+            window.addEventListener('load', function() {
+                // you can access the THREE.Light object from the shadow-light element
+                var lightEl = document.querySelector('a-shadow-light');
+                console.log(lightEl.shadowLight);
+            });
+        </script>
+		
+		
 	</a-scene>
 </body>
 </html>
