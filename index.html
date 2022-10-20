@@ -18,7 +18,7 @@
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-	<!-- not important test on PC -->
+	<!-- not important test on PC
 	<script>
         THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
@@ -48,12 +48,12 @@
 				};
 		  })
 		});
-	</script>
+	</script>-->
 	<!-- generate RGBA image: https://playground.babylonjs.com/#95Y4D7-->
 	<script>
       AFRAME.registerComponent("foo", {
         init: function() {
-          var targetCube = new THREE.WebGLRenderTargetCube(512, 512);
+          var targetCube = new THREE.WebGLRenderTargetCube(128, 128);
           var renderer = this.el.sceneEl.renderer;
 
           this.el.addEventListener("model-loaded", e => {
@@ -131,7 +131,7 @@
             </a-shadow-plane>-->
 		
 		<!-- test: gps-camera="simulateLatitude:50.11231464356064; simulateLongitude:14.44870821344731" -->
-        <a-camera gps-camera rotation-reader ></a-camera>
+        <a-camera gps-camera="simulateLatitude:50.11231464356064; simulateLongitude:14.44870821344731" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' rotation-reader ></a-camera>
 
 		<a-entity
 			gltf-model="#TextCZ" 
