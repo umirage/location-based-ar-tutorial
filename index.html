@@ -4,18 +4,22 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Parallels</title>
+	<meta name="description" content="AR experience layer for Tomáš Moravec's sculptures in Brusel 2022. Coding and 3D assets by Dušan Marcinko.">
+	<meta name="keywords" content="Tomáš Moravec, Prarallels, AR, augmented reality, sculpture, Brusel">
+	<meta name="author" content="Dusan Marcinko">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 	<script src="https://raw.githack.com/n5ro/aframe-physics-system/master/dist/aframe-physics-system.min.js"></script>
 	<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
 	<script src="https://raw.githack.com/haf-decent/aframe-shadow-casting/master/index.js"></script>
 	<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-	<script src="https://unpkg.com/aframe-cubemap-component@2.1.0/dist/aframe-cubemap-component.min.js"></script>
-	
+	<script src="https://unpkg.com/aframe-cubemap-component@2.1.0/dist/aframe-cubemap-component.min.js"></script>	
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-<script>
+	<!-- not important
+	<script>
         THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 	<script>
@@ -44,7 +48,7 @@
 				};
 		  })
 		});
-	</script>
+	</script> -->
 	<!-- generate RGBA image: https://playground.babylonjs.com/#95Y4D7-->
 	<script>
       AFRAME.registerComponent("foo", {
@@ -54,7 +58,8 @@
 
           this.el.addEventListener("model-loaded", e => {
             let mesh = this.el.getObject3D("mesh");
-            
+			
+            // HDRI generate from HDR image to PNG RGBA. A channel is light intensity
             var texture = new THREE.TextureLoader().load(
               "./assets/hdr/enviromentRGBD_256.png",
               function() {
@@ -75,7 +80,7 @@
       });
     </script>
 
-	
+	<!-- a-frame scene start here-->
     <a-scene
         vr-mode-ui="enabled: false"
 		embedded
@@ -84,7 +89,16 @@
 		class="fullscreen" inspector="" keyboard-shortcuts="" screenshot="" shadow="autoUpdate: true; type:pcfsoft"
 		light="defaultLightsEnabled: false"
 		>
-		
+		<!-- cubemap reflection only work with Cross Cubemaps not working with equirentangular on a-frame objects
+			https://jonaszeitler.se/cubemap-toastmap-generator/
+			example to assets: <a-cubemap id="cubemap">
+		  <img src="./assets/hdr/px.png">
+		  <img src="./assets/hdr/nx.png">
+		  <img src="./assets/hdr/py.png">
+		  <img src="./assets/hdr/ny.png">
+		  <img src="./assets/hdr/pz.png">
+		  <img src="./assets/hdr/nz.png">
+		</a-cubemap>-->
 		<a-assets>
 			<a-asset-item id="TextCZ" src="./assets/Text-CZ.glb"></a-asset-item>
 			<a-asset-item id="TextFR" src="./assets/Text-FR.glb"></a-asset-item>
@@ -92,7 +106,7 @@
 			<img id="sky" src="./assets/hdr/enviromentRGBD_256.png">	
 	    </a-assets>
 
-		<!--<a-sky color="#AAA"></a-sky>-->
+		<!-- test sky enviroment <a-sky color="#AAA"></a-sky>-->
 		
 		
 		<a-light type="ambient" intensity="0.5" castShadow="false"></a-light>
@@ -115,10 +129,8 @@
 				opacity="0.6">
             </a-shadow-plane>
 		
-		
-        <a-camera gps-camera="simulateLatitude:50.11231464356064; simulateLongitude:14.44870821344731" 
-		rotation-reader >
-		</a-camera>
+		<!-- test: gps-camera="simulateLatitude:50.11231464356064; simulateLongitude:14.44870821344731" -->
+        <a-camera gps-camera rotation-reader ></a-camera>
 
 		<a-entity
 			gltf-model="#TextCZ" 
@@ -165,6 +177,7 @@
 			foo>
 		</a-entity>
 		
+		<!-- script for matte shadow-->
 		<script>
             window.addEventListener('load', function() {
                 // you can access the THREE.Light object from the shadow-light element
