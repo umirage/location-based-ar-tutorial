@@ -131,14 +131,14 @@
 		
 		<!-- test: gps-camera="simulateLatitude:50.11231464356064; simulateLongitude:14.44870821344731" -->
 		<!-- smooth camera:   look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'-->
-        <a-camera gps-camera look-controls-enabled='true' rotation-reader ></a-camera>
+        <a-camera gps-camera look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' rotation-reader ></a-camera>
 
 		<a-entity
 			gltf-model="#TextCZ" 
 			rotation="0 120 0"
 			animation="property: rotation; to: 0 -240 0; loop: true; dur: 30000; easing:linear"
 			scale="1 1 1"
-			gps-entity-place="latitude: 50.105468301958624; longitude: 14.45293324548003" 
+			gps-entity-place="latitude: 50.86844082867875; longitude: 4.344119285240534" 
 			shadow="cast: true"
 			cube-env-map="path: ./assets/hdr/cubemap/;
                  extension: png;
@@ -147,26 +147,26 @@
 			foo>
 		</a-entity>
 		
-		<!--<a-entity
+		<a-entity
 			gltf-model="#TextFR" 
 			rotation="0 240 0"
 			animation="property: rotation; to: 0 -120 0; loop: true; dur: 30000; easing:linear"
 			scale="1 1 1"
-			gps-entity-place="latitude: 50.112444713403825; longitude: 14.448964084535845" 
+			gps-entity-place="latitude: 50.86760103818843; longitude: 4.345056756044002" 
 			shadow="cast: true"
 			cube-env-map="path: ./assets/hdr/cubemap/;
                  extension: png;
                  reflectivity: 0.9;"
 			shadow="receive: false"
 			foo>
-		</a-entity>-->
+		</a-entity>
 		
 		<a-entity
 			gltf-model="#TextND" 
 			rotation="0 0 0"
 			animation="property: rotation; to: 0 -360 0; loop: true; dur: 30000; easing:linear"
 			scale="1 1 1"
-			gps-entity-place="latitude: 50.1121431167653; longitude: 14.449087069706005" 
+			gps-entity-place="latitude: 50.86741423339021; longitude: 4.3443079830766855" 
 			shadow="cast: true"
 			cube-env-map="path: ./assets/hdr/cubemap/;
                  extension: png;
