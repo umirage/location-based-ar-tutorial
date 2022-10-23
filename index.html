@@ -49,7 +49,8 @@
 		  })
 		});
 	</script>-->
-	<!-- generate RGBA image: https://playground.babylonjs.com/#95Y4D7-->
+	<!-- generate RGBA image: https://playground.babylonjs.com/#95Y4D7 
+		cubemap envmap https://stackoverflow.com/questions/59625510/aframe-gltf-model-demo-with-envmap/59628444#59628444 -->
 	<script>
       AFRAME.registerComponent("foo", {
         init: function() {
@@ -133,6 +134,7 @@
 		<!-- smooth camera:   look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'-->
         <a-camera gps-camera look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' rotation-reader ></a-camera>
 
+		<!-- https://github.com/n5ro/aframe-extras/tree/master/src/loaders#animation -->
 		<a-entity
 			gltf-model="#TextCZ" 
 			rotation="0 120 0"
@@ -175,7 +177,7 @@
 			foo>
 		</a-entity>
 		
-		<!-- script for matte shadow-->
+		<!-- script for matte shadow https://libraries.io/npm/aframe-shadow-casting-->
 		<!--<script>
             window.addEventListener('load', function() {
                 // you can access the THREE.Light object from the shadow-light element
