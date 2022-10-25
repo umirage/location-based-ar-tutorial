@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Parallels</title>
+    <title>Parallels AR</title>
 	<meta name="description" content="AR experience layer for Tomáš Moravec's sculptures in Brusel 2022. Coding and 3D assets by Dušan Marcinko.">
 	<meta name="keywords" content="Tomáš Moravec, Parallels, AR, augmented reality, sculpture, Brusel">
 	<meta name="author" content="Dusan Marcinko">
@@ -11,10 +11,21 @@
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 	<script src="https://raw.githack.com/n5ro/aframe-physics-system/master/dist/aframe-physics-system.min.js"></script>
-	<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+	<!--<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>-->
 	<!--<script src="https://raw.githack.com/haf-decent/aframe-shadow-casting/master/index.js"></script>-->
 	<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 	<script src="https://unpkg.com/aframe-cubemap-component@2.1.0/dist/aframe-cubemap-component.min.js"></script>	
+	<!--  Essential META Tags -->
+	<meta property="og:title" content="Parallels AR">
+	<meta property="og:type" content="application" />
+	<meta property="og:image" content="./assets/images/parallels-preview-sm.jpg">
+	<meta property="og:url" content="https://tomasmoravec.cz/parallels">
+	<meta name="twitter:card" content="summary_large_image">
+
+	<!--  Non-Essential META, But Recommended -->
+	<meta property="og:description" content="AR experience layer for Tomáš Moravec's sculptures in Brusel 2022. Coding and 3D assets by Dušan Marcinko.">
+	<meta property="og:site_name" content="Parallels AR">
+	<meta name="twitter:image:alt" content="Parallels sculpture AR text rotation">
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
@@ -104,7 +115,7 @@
 			<a-asset-item id="TextCZ" src="./assets/Text-CZ.glb"></a-asset-item>
 			<a-asset-item id="TextFR" src="./assets/Text-FR.glb"></a-asset-item>
 			<a-asset-item id="TextND" src="./assets/Text-ND.glb"></a-asset-item>
-			<img id="sky" src="./assets/hdr/enviromentRGBD_256.png">	
+			<img id="sky" src="./assets/images/enviromentRGBD_256.png">	
 	    </a-assets>
 
 		<!-- test sky enviroment <a-sky color="#AAA"></a-sky>-->
@@ -135,6 +146,7 @@
         <a-camera gps-camera look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' rotation-reader ></a-camera>
 
 		<!-- https://github.com/n5ro/aframe-extras/tree/master/src/loaders#animation -->
+		<!-- Brusel gps-entity-place="latitude: 50.86844082867875; longitude: 4.344119285240534"-->
 		<a-entity
 			gltf-model="#TextCZ" 
 			rotation="0 120 0"
@@ -149,6 +161,7 @@
 			foo>
 		</a-entity>
 		
+		<!-- Brusel gps-entity-place="latitude: 50.86760103818843; longitude: 4.345056756044002"-->
 		<a-entity
 			gltf-model="#TextFR" 
 			rotation="0 240 0"
@@ -163,6 +176,7 @@
 			foo>
 		</a-entity>
 		
+		<!-- Brusel gps-entity-place="latitude: 50.86741423339021; longitude: 4.3443079830766855"-->
 		<a-entity
 			gltf-model="#TextND" 
 			rotation="0 0 0"
